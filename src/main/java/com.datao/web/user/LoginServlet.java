@@ -47,11 +47,11 @@ public class LoginServlet extends BaseServlet {
                 result.put("state", "success");
             } else {
                 result.put("state", "error");
-                result.put("message", "用户名或密码错误");
+                result.put("errorMessage", "1");
             }
         } else {
             result.put("state", "error");
-            result.put("message", "参数错误!");
+            result.put("errorMessage", "2");
         }
 
         sendJson(response, result);

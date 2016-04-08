@@ -129,7 +129,7 @@
                     required: " 请输入账号",
                     minlength: " 账号最小长度3位",
                     maxlength: " 账号最大长度15位",
-                    remote: "该账号已被使用,请重新输入"
+                    remote: " 该账号已被使用,请重新输入"
                 },
                 password: {
                     required: " 请输入密码",
@@ -142,11 +142,11 @@
                 email: {
                     required: " 请输入邮箱",
                     email: " 请输入正确的邮箱",
-                    remote: "该邮箱已绑定账号"
+                    remote: " 该邮箱已绑定账号"
                 },
                 captcha: {
-                    required: "请输入验证码",
-                    remote: "输入的验证码不正确"
+                    required: " 请输入验证码",
+                    remote: " 输入的验证码不正确"
                 }
             },
 

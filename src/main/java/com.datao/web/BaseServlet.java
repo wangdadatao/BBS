@@ -35,6 +35,7 @@ public class BaseServlet extends HttpServlet {
         out.close();
     }
 
+    //把ipv6修改成ipv4
     public String getIp(HttpServletRequest request) {
         String ip = request.getRemoteAddr();
         if ("0:0:0:0:0:0:0:1".equals(ip)) {

@@ -20,6 +20,6 @@ public class LoginOutServlet extends BaseServlet {
         HttpSession session = req.getSession();
         session.invalidate();
 
-        forward(req, resp, "index.jsp");
+        resp.sendRedirect("/login.do?code=8001");
     }
 }

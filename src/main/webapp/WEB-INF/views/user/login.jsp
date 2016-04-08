@@ -33,7 +33,26 @@
                     </div>
                 </div>
             </c:when>
+            <c:when test="${param.code == '8001'}">
+                <div>
+                    <div class="alert alert-success">
+                        已安全退出!
+                    </div>
+                </div>
+            </c:when>
+            <c:when test="${param.code == '7001'}">
+                <div>
+                    <div class="alert alert-success">
+                        找回密码成功,请登录
+                    </div>
+                </div>
+            </c:when>
         </c:choose>
+        <div id="show-alert" style="display: none">
+            <div class="alert alert-error">
+                注册成功,请登录
+            </div>
+        </div>
 
         <form id="form-log" class="form-horizontal">
             <div class="control-group">
@@ -105,7 +124,15 @@
                     },
                     success: function (json) {
                         if (json.state == 'error') {
-                            alert(json.message);
+                            if (json.errorMessage == "1") {
+                                // 帐号或密码错误
+                                $("#show-alert").show();
+                                $("#show-alert .alert").text("帐号或密码错误!")
+                            } else if (json.errorMessage == "2") {
+                                // 参数错误
+                                $("#show-alert").show();
+                                $("#show-alert .alert").text("参数错误")
+                            }
                         } else {
                             window.location.href = "/index.do";
                         }

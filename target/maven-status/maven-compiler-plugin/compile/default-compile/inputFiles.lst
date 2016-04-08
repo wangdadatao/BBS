@@ -3,6 +3,7 @@ D:\IdeaWorkSpace\BBS\src\main\java\com.datao\util\ConnectionManager.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\user\validate\VailCaptcha.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\filter\EncodingFilter.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\user\validate\ValiEmail.java
+D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\user\ForgetPwdServlet.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\user\LoginOutServlet.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\BaseServlet.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\service\user\UserService.java
@@ -13,6 +14,10 @@ D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\IndexServlet.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\entity\User.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\user\LoginServlet.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\service\captcha\Captcha.java
+D:\IdeaWorkSpace\BBS\src\main\java\com.datao\entity\ForgetPassword.java
+D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\user\ForgetCallbackServlet.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\user\validate\ValiUserName.java
+D:\IdeaWorkSpace\BBS\src\main\java\com.datao\DAO\ForgetPasswordDao.java
+D:\IdeaWorkSpace\BBS\src\main\java\com.datao\util\EmailUtil.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\user\RegServlet.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\util\ConfigProp.java

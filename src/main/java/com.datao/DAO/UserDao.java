@@ -23,14 +23,20 @@ public class UserDao {
     }
 
     //根据emali查询User
-    public User findByEmail(String email){
+    public User findByEmail(String email) {
         String sql = "select * from user where email=?";
-        return DBhelper.query(sql,new BeanHandler<User>(User.class),email);
+        return DBhelper.query(sql, new BeanHandler<User>(User.class), email);
     }
 
     //修改用户资料
     public void upUser(User user) {
         String sql = "update user set password=? ,email=?, headimg=?, lastlogip=?, logtime=?, state=? where id=?";
-        DBhelper.updater(sql,user.getPassword(),user.getEmail(),user.getHeadimg(),user.getLastlogip(),user.getLogtime(),user.getState(),user.getId());
+        DBhelper.updater(sql, user.getPassword(), user.getEmail(), user.getHeadimg(), user.getLastlogip(), user.getLogtime(), user.getState(), user.getId());
+    }
+
+    //根据id查找用户
+    public User findById(Integer uid) {
+        String sql = "select * from user where id=?";
+        return DBhelper.query(sql, new BeanHandler<User>(User.class), uid);
     }
 }
