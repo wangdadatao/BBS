@@ -53,6 +53,22 @@
                     <input type="text" name="email">
                 </div>
             </div>
+
+            <div class="control-group">
+                <label class="control-label">验证码</label>
+                <div class="controls">
+                    <input type="text" name="captcha">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls">
+                    <a id="a-change-captcha" href="javascript:;">
+                        <img id="img-captcha" src="/newcaptcha.png" alt="验证码">
+                    </a>
+                </div>
+            </div>
+
             <div class="form-actions">
                 <a id="a-submit" href="javascript:;" class="btn btn-primary">注册</a>
                 <a href="/login.do">
@@ -73,6 +89,10 @@
 
 <script>
     $(function () {
+
+        $("#a-change-captcha").click(function () {
+            $("#img-captcha").attr("src", "/newcaptcha.png?_=" + new Date().getTime());
+        });
 
         $("#form-reg").validate({
             errorClass: "text-error",
@@ -97,6 +117,10 @@
                     required: true,
                     email: true,
                     remote: "/valiemail.do"
+                },
+                captcha: {
+                    required: true,
+                    remote: "/valicaptcha.do"
                 }
             },
 
@@ -119,6 +143,10 @@
                     required: " 请输入邮箱",
                     email: " 请输入正确的邮箱",
                     remote: "该邮箱已绑定账号"
+                },
+                captcha: {
+                    required: "请输入验证码",
+                    remote: "输入的验证码不正确"
                 }
             },
 

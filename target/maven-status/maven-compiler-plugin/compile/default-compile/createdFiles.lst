@@ -3,7 +3,9 @@ com\datao\DAO\UserDao.class
 com\datao\web\BaseServlet.class
 com\datao\web\user\RegServlet.class
 com\datao\web\IndexServlet.class
+com\datao\service\captcha\Captcha.class
 com\datao\web\user\LoginServlet.class
+com\datao\web\user\validate\VailCaptcha.class
 com\datao\service\user\UserService.class
 com\datao\web\filter\EncodingFilter.class
 com\datao\util\ConnectionManager.class

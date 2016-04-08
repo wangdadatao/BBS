@@ -1,5 +1,6 @@
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\exception\DataAccessException.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\util\ConnectionManager.java
+D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\user\validate\VailCaptcha.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\filter\EncodingFilter.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\user\validate\ValiEmail.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\BaseServlet.java
@@ -10,6 +11,7 @@ D:\IdeaWorkSpace\BBS\src\main\java\com.datao\DAO\UserDao.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\IndexServlet.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\entity\User.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\user\LoginServlet.java
+D:\IdeaWorkSpace\BBS\src\main\java\com.datao\service\captcha\Captcha.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\user\validate\ValiUserName.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\user\RegServlet.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\util\ConfigProp.java
