@@ -16,8 +16,8 @@ public class DBhelper {
             return qr.query(sql, handler, objects);
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DataAccessException(e,"DBhelper 异常");
-         }
+            throw new DataAccessException(e, "DBhelper 异常");
+        }
 
     }
 
@@ -25,7 +25,7 @@ public class DBhelper {
     public static void updater(String sql, Object... objects) {
         QueryRunner qr = new QueryRunner(ConnectionManager.getDataSource());
         try {
-            qr.update( sql, objects);
+            qr.update(sql, objects);
         } catch (SQLException e) {
             e.printStackTrace();
         }

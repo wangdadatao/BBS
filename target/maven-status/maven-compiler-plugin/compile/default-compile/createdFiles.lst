@@ -1,8 +1,15 @@
+com\datao\web\user\validate\ValiUserName.class
+com\datao\DAO\UserDao.class
 com\datao\web\BaseServlet.class
 com\datao\web\user\RegServlet.class
 com\datao\web\IndexServlet.class
 com\datao\web\user\LoginServlet.class
+com\datao\service\user\UserService.class
+com\datao\web\filter\EncodingFilter.class
+com\datao\util\ConnectionManager.class
+com\datao\entity\User.class
+com\datao\web\filter\AbstractFilter.class
 com\datao\util\DBhelper.class
+com\datao\web\user\validate\ValiEmail.class
 com\datao\exception\DataAccessException.class
 com\datao\util\ConfigProp.class
-com\datao\util\ConnectionManager.class
