@@ -25,28 +25,38 @@
             <span class="title"><i class="fa fa-sign-in"></i> 登录</span>
         </div>
 
-        <form action="" class="form-horizontal">
+        <c:choose>
+            <c:when test="${param.code == '9001'}">
+                <div>
+                    <div class="alert alert-success">
+                        注册成功,请登录
+                    </div>
+                </div>
+            </c:when>
+        </c:choose>
+
+        <form id="form-log" class="form-horizontal">
             <div class="control-group">
                 <label class="control-label">账号</label>
                 <div class="controls">
-                    <input type="text">
+                    <input type="text" name="username">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">密码</label>
                 <div class="controls">
-                    <input type="text">
+                    <input type="text" name="password">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label"></label>
                 <div class="controls">
-                    <a href="foundPassword.html">忘记密码</a>
+                    <a href="/forgetpwd.do">忘记密码</a>
                 </div>
             </div>
 
             <div class="form-actions">
-                <button class="btn btn-primary">登录</button>
+                <a id="a-login" class="btn btn-primary">登录</a>
                 <a class="pull-right" href="/reg.do">注册账号</a>
             </div>
 
@@ -57,5 +67,69 @@
     <!--box end-->
 </div>
 <!--container end-->
+
+<script src="/static/js/jquery-1.12.2.min.js"></script>
+<script src="/static/js/jquery.validate.js"></script>
+
+<script>
+    $(function () {
+
+        $("#form-log").validate({
+            errorClass: "text-error",
+            errorElemetn: "span",
+            rules: {
+                username: {
+                    required: true
+                },
+                password: {
+                    required: true
+                }
+            },
+            messages: {
+                username: {
+                    required: "请输入帐号"
+                },
+                password: {
+                    required: "请输入密码"
+                }
+            },
+            submitHandler: function (form) {
+                var $a = $("#a-login");
+
+                $.ajax({
+                    url: "/login.do",
+                    type: "post",
+                    data: $(form).serialize(),
+                    beforeSend: function () {
+                        $a.text("登录中...").attr("disabled", "disabled");
+                    },
+                    success: function (json) {
+                        if (json.state == 'error') {
+                            alert(json.message);
+                        } else {
+                            window.location.href = "/index.do";
+                        }
+                    },
+                    error: function () {
+                        alert("服务器错误，请稍后再试");
+                    },
+                    complete: function () {
+                        $a.text("登录").removeAttr("disabled");
+                    }
+                });
+            }
+
+
+        });
+
+        $("#a-login").click(function () {
+            $("#form-log").submit();
+        })
+
+
+    })
+</script>
+
+
 </body>
 </html>

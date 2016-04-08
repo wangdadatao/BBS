@@ -33,8 +33,6 @@ public class ValiUserName extends BaseServlet {
                 result = "false";
             }
         }
-
         sendText(resp, result);
-
     }
 }

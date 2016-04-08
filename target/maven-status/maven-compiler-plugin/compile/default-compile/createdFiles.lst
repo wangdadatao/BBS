@@ -15,3 +15,4 @@ com\datao\util\DBhelper.class
 com\datao\web\user\validate\ValiEmail.class
 com\datao\exception\DataAccessException.class
 com\datao\util\ConfigProp.class
+com\datao\web\user\LoginOutServlet.class

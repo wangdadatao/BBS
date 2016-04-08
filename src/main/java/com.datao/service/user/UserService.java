@@ -39,5 +39,23 @@ public class UserService {
         userDao.addUser(user);
     }
 
+    //登录查找用户
+    public User login(String username, String password, String ip) {
+        User user = new UserDao().findByName(username);
+        if (user != null) {
+            String bigPassWord = DigestUtils.md5Hex(password + ConfigProp.get("user.password.salt"));
+
+            if (user.getPassword().equals(bigPassWord)) {
+                user.setLastlogip(ip);
+                user.setLogtime(DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
+
+                new UserDao().upUser(user);
+                return user;
+            }
+        }
+        return null;
+
+    }
+
 
 }

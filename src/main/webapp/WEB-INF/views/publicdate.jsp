@@ -15,10 +15,10 @@
         </a>
         <ul class="unstyled inline pull-right">
             <c:choose>
-                <c:when test="${not empty sessionScope.curr_user}">
+                <c:when test="${not empty sessionScope.user}">
                     <li>
                         <a href="#">
-                            <img src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/20/h/20"
+                            <img src="http://7xsaoe.com1.z0.glb.clouddn.com/${sessionScope.user.headimg}?imageView2/1/w/20/h/20"
                                  class="img-circle" alt="">
                         </a>
                     </li>
@@ -29,10 +29,10 @@
                         <a href="#"><i class="fa fa-bell"></i></a>
                     </li>
                     <li>
-                        <a href="setting.html"><i class="fa fa-cog"></i></a>
+                        <a href="#"><i class="fa fa-cog"></i></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-sign-out"></i></a>
+                        <a href="/loginout.do"><i class="fa fa-sign-out"></i></a>
                     </li>
                 </c:when>
                 <c:otherwise>

@@ -3,6 +3,7 @@ D:\IdeaWorkSpace\BBS\src\main\java\com.datao\util\ConnectionManager.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\user\validate\VailCaptcha.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\filter\EncodingFilter.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\user\validate\ValiEmail.java
+D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\user\LoginOutServlet.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\BaseServlet.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\service\user\UserService.java
 D:\IdeaWorkSpace\BBS\src\main\java\com.datao\web\filter\AbstractFilter.java

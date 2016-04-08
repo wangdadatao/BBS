@@ -38,13 +38,13 @@
             <div class="control-group">
                 <label class="control-label">密码</label>
                 <div class="controls">
-                    <input type="text" name="password" id="password">
+                    <input type="password" name="password" id="password">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">重复密码</label>
                 <div class="controls">
-                    <input type="text" name="repassword">
+                    <input type="password" name="repassword">
                 </div>
             </div>
             <div class="control-group">
@@ -71,7 +71,7 @@
 
             <div class="form-actions">
                 <a id="a-submit" href="javascript:;" class="btn btn-primary">注册</a>
-                <a href="/login.do">
+                <a href="/login.do?code=9001">
                     <span id="span-success" class="hide">注册成功! 5秒后跳入登录页面(点击直接进入)</span>
                 </a>
                 <a class="pull-right" href="/login.do">登录</a>
@@ -160,7 +160,7 @@
                         setInterval(function () {
                             time--;
                             if (time == 0) {
-                                window.location.href = "/login.do";
+                                window.location.href = "/login.do?code=9001";
                                 return;
                             }
                             $("#span-success").html("注册成功! " + time + "秒后跳入登录页面(点击直接进入)")

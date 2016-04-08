@@ -28,5 +28,9 @@ public class UserDao {
         return DBhelper.query(sql,new BeanHandler<User>(User.class),email);
     }
 
-
+    //修改用户资料
+    public void upUser(User user) {
+        String sql = "update user set password=? ,email=?, headimg=?, lastlogip=?, logtime=?, state=? where id=?";
+        DBhelper.updater(sql,user.getPassword(),user.getEmail(),user.getHeadimg(),user.getLastlogip(),user.getLogtime(),user.getState(),user.getId());
+    }
 }
