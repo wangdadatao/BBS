@@ -57,7 +57,7 @@
             <div class="control-group">
                 <label class="control-label">验证码</label>
                 <div class="controls">
-                    <input type="text" name="captcha">
+                    <input type="text" name="captcha" placeholder="请输入验证码">
                 </div>
             </div>
             <div class="control-group">
@@ -91,8 +91,13 @@
     $(function () {
 
         $("#a-change-captcha").click(function () {
-            $("#img-captcha").attr("src", "/newcaptcha.png?_=" + new Date().getTime());
+            changeCaptcha();
         });
+
+
+        function changeCaptcha() {
+            $("#img-captcha").attr("src", "/newcaptcha.png?_=" + new Date().getTime());
+        }
 
         $("#form-reg").validate({
             errorClass: "text-error",
@@ -153,6 +158,7 @@
             submitHandler: function (form) {
                 $.post("/reg.do", $(form).serialize()).done(function (result) {
                     if (result.state == "error") {
+                        changeCaptcha();
                         alert(result.errorMessage);
                     } else {
                         $("#span-success").show();

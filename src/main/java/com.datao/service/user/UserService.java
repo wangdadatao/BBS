@@ -13,6 +13,7 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
 /**
@@ -138,16 +139,24 @@ public class UserService {
 
     /**
      * 设置新密码
+     *
      * @param password
      * @param uid
      * @return
      */
 
     public void resetPassword(String password, Integer uid) {
-            password = DigestUtils.md5Hex(password + ConfigProp.get("user.password.salt"));
-            User user = new UserDao().findById(uid);
-            user.setPassword(password);
-            new UserDao().upUser(user);
-            new ForgetPasswordDao().removeUid(uid);
+        password = DigestUtils.md5Hex(password + ConfigProp.get("user.password.salt"));
+        User user = new UserDao().findById(uid);
+        user.setPassword(password);
+        new UserDao().upUser(user);
+        new ForgetPasswordDao().removeUid(uid);
+    }
+
+    //验证错误次数
+    public void errNum(HttpSession session) {
+        Integer errorNum = Integer.valueOf((String) session.getAttribute("errorTimes"));
+        errorNum++;
+        session.setAttribute("errorTimes", errorNum + "");
     }
 }
