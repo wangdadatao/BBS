@@ -7,12 +7,14 @@ import com.datao.entity.User;
 import com.datao.exception.DataAccessException;
 import com.datao.util.ConfigProp;
 import com.datao.util.EmailUtil;
+import com.qiniu.util.Auth;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
@@ -154,9 +156,63 @@ public class UserService {
     }
 
     //验证错误次数
-    public void errNum(HttpSession session) {
+    public int errNum(HttpSession session) {
         Integer errorNum = Integer.valueOf((String) session.getAttribute("errorTimes"));
         errorNum++;
         session.setAttribute("errorTimes", errorNum + "");
+        return errorNum;
+    }
+
+    //保存用户的新邮箱
+    public Boolean save(User user, String email) {
+        if (user != null && email != null) {
+            user.setEmail(email);
+            new UserDao().upUser(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //用户设置新密码
+    public String settingPassword(HttpServletRequest request, String nowPassword, String newPassword) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            nowPassword = DigestUtils.md5Hex(nowPassword + ConfigProp.get("user.password.salt"));
+            if (user.getPassword().equals(nowPassword)) {
+                newPassword = DigestUtils.md5Hex(newPassword + ConfigProp.get("user.password.salt"));
+                user.setPassword(newPassword);
+                new UserDao().upUser(user);
+                return "success";
+            }
+        }
+        return "error";
+    }
+
+    //产生七牛上传的token
+    public String getToken() {
+        //1准备好AK和SK
+        final String AK = ConfigProp.get("qiniu.AK");
+        final String SK = ConfigProp.get("qiniu.SK");
+
+        //2指定上传的空间
+        final String bucketName = "pictures";
+
+        //3创建auth对象
+        Auth auth = Auth.create(AK, SK);
+        return auth.uploadToken(bucketName);
+
+    }
+
+    //保存用户头像
+    public void savaHeeadImg(User user, String newHeadimg) {
+        if(user != null){
+            user.setHeadimg(newHeadimg);
+            userDao.upUser(user);
+        }else {
+            throw new DataAccessException("头像设置失败"); //找不到user对象,头像设置失败
+        }
+
     }
 }

@@ -1,5 +1,7 @@
 package com.datao.web;
 
+import com.datao.entity.User;
+import com.datao.exception.DataAccessException;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -42,6 +44,26 @@ public class BaseServlet extends HttpServlet {
             ip = "127.0.0.1";
         }
         return ip;
+    }
+
+    //判断邮箱是否是自己的
+    public Boolean settingEmail(HttpServletRequest request, String email) {
+        try {
+            return ((User) request.getSession().getAttribute("user")).getEmail().equals(email);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    //判断是否是Ajax请求
+    public boolean isAjaxReq(HttpServletRequest request) {
+        return "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+    }
+
+    //得到储存在Session中的user对象
+    public User getSessionUser(HttpServletRequest request) {
+        return (User) request.getSession().getAttribute("user");
     }
 
 }

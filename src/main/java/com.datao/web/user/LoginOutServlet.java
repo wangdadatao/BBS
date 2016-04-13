@@ -19,7 +19,16 @@ public class LoginOutServlet extends BaseServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         session.invalidate();
+        String code = null;
+        String getCode = req.getParameter("code");
 
-        resp.sendRedirect("/login.do?code=8001");
+        //判断是安全退出还是修改密码后重新登录
+        if (getCode != null) {
+            code = getCode;
+        }else{
+            code = "8001";
+        }
+
+        resp.sendRedirect("/login.do?code=" + code);
     }
 }

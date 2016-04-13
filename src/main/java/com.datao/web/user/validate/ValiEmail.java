@@ -2,6 +2,7 @@ package com.datao.web.user.validate;
 
 import com.datao.DAO.UserDao;
 import com.datao.entity.User;
+import com.datao.service.user.UserService;
 import com.datao.web.BaseServlet;
 
 import javax.servlet.ServletException;
@@ -28,10 +29,11 @@ public class ValiEmail extends BaseServlet {
             if (user == null) {
                 result = "true";
             } else {
-                result = "false";
+                result = settingEmail(req, email) ? "true" : "false";
             }
         }
 
         sendText(resp, result);
     }
+
 }

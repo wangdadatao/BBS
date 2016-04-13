@@ -32,25 +32,25 @@
             <div class="control-group">
                 <label class="control-label">账号</label>
                 <div class="controls">
-                    <input type="text" name="username">
+                    <input type="text" name="username" placeholder="请输入帐号">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">密码</label>
                 <div class="controls">
-                    <input type="password" name="password" id="password">
+                    <input type="password" name="password" id="password" placeholder="请输入密码">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">重复密码</label>
                 <div class="controls">
-                    <input type="password" name="repassword">
+                    <input type="password" name="repassword" placeholder="请再次输入密码">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">电子邮件</label>
                 <div class="controls">
-                    <input type="text" name="email">
+                    <input type="text" name="email" placeholder="请输入邮箱地址">
                 </div>
             </div>
 
@@ -64,7 +64,7 @@
                 <label class="control-label"></label>
                 <div class="controls">
                     <a id="a-change-captcha" href="javascript:;">
-                        <img id="img-captcha" src="/newcaptcha.png" alt="验证码">
+                        <img id="img-captcha" src="/newcaptcha.png" title="点击更换" alt="验证码">
                     </a>
                 </div>
             </div>
@@ -72,7 +72,7 @@
             <div class="form-actions">
                 <a id="a-submit" href="javascript:;" class="btn btn-primary">注册</a>
                 <a href="/login.do?code=9001">
-                    <span id="span-success" class="hide">注册成功! 5秒后跳入登录页面(点击直接进入)</span>
+                    <span id="span-success" class="hide">注册成功! 5秒后自动跳入登录页面(点击直接进入)</span>
                 </a>
                 <a class="pull-right" href="/login.do">登录</a>
             </div>

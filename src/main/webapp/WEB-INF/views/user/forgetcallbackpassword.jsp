@@ -62,7 +62,7 @@
     $(function () {
         $("#form-forgetpwd").validate({
             errorClass: "text-error",
-            errorEelment: "span",
+            errorElement: "span",
             rules: {
                 password: {
                     required: true,
@@ -75,12 +75,12 @@
             },
             messages: {
                 password: {
-                    required: "请输入密码",
-                    rangelength: "密码长度为6~16位"
+                    required: " 请输入密码",
+                    rangelength: " 密码长度为6~16位"
                 },
                 repassword: {
-                    required: "请再次输入密码",
-                    equalTo: "两次密码输入不同"
+                    required: " 请再次输入密码",
+                    equalTo: " 两次密码输入不同"
                 }
             },
 
@@ -89,12 +89,15 @@
                     url: "/forgetcallback.do",
                     type: "post",
                     data: $(form).serialize(),
+                    beforeSend: function () {
+                        $("#a-submit").text("请稍后...")
+                    },
                     success: function (json) {
                         if (json.status == 'error') {
                             //设置密码错误
                             $("#show-alert").show();
                             $("#show-error-text").text(json.errorMessage);
-
+                            $("#a-submit").text("确定")
                         } else {
                             //设置密码成功
                             $("#div-container1").hide();
@@ -104,6 +107,9 @@
                     },
                     error: function () {
                         alert("服务器错误，请稍后再试");
+                    },
+                    complit: function () {
+                        $("#a-submit").text("确定");
                     }
                 });
             }

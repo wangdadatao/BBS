@@ -1,5 +1,6 @@
 package com.datao.web.user;
 
+import com.datao.entity.User;
 import com.datao.exception.DataAccessException;
 import com.datao.service.user.UserService;
 import com.datao.web.BaseServlet;
@@ -23,12 +24,23 @@ public class RegServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        forward(req, resp, "user/reg.jsp");
+        User user = getSessionUser(req);
+        if (user != null) {
+            resp.sendRedirect("/index.do");
+        } else {
+            forward(req, resp, "user/reg.jsp");
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = getSessionUser(req);
+        if(user != null){
+            resp.sendError(400);
+        }
+
         HttpSession session = req.getSession();
+        session.removeAttribute("errorTimes");
         //先判断验证码是否正确
         String oldCaptcha = (String) session.getAttribute("captcha");
         String captcha = req.getParameter("captcha");
@@ -59,6 +71,7 @@ public class RegServlet extends BaseServlet {
             map.put("state", "error");
             map.put("errorMessage", "请输入验证码!");
         }
+
         sendJson(resp, map);
     }
 }

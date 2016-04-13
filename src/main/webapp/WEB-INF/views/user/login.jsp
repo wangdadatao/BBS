@@ -50,7 +50,6 @@
                 },
                 submitHandler: function (form) {
                     var $a = $("#a-login");
-
                     $.ajax({
                         url: "/login.do",
                         type: "post",
@@ -65,16 +64,18 @@
                                     $("#show-alert").show();
                                     $(".div-show-alert").hide();
                                     $("#show-alert .alert").text("帐号或密码错误!")
-
+                                    if (json.errorNum >= 3) {
+                                        captchaShow();
+                                    }
                                 } else if (json.errorMessage == "2") {
                                     // 参数错误
                                     errorShows("请输入验证码");
-
                                 } else if (json.errorMessage == "3") {
                                     errorShows("验证码错误")
                                 }
                             } else {
-                                window.location.href = "/index.do";
+
+                                window.location.href = "${not empty param.reback ? param.reback : '/index.do'}";
                             }
                         },
                         error: function () {
@@ -103,6 +104,7 @@
 
             //错误码为6001时显示验证码
             function captchaShow() {
+                $("#input-captcha").val("");
                 $("#div-show-captcha").show();
                 $("#img-captcha").attr("src", "/newcaptcha.png?_=" + new Date().getTime());
             }
@@ -147,6 +149,20 @@
                     </div>
                 </div>
             </c:when>
+            <c:when test="${param.code == '5001'}">
+                <div class="div-show-alert">
+                    <div class="alert alert-success">
+                        更改密码成功,请重新登录!
+                    </div>
+                </div>
+            </c:when>
+            <c:when test="${param.code == '4001'}">
+                <div class="div-show-alert">
+                    <div class="alert alert-error">
+                        请登录后再试!
+                    </div>
+                </div>
+            </c:when>
         </c:choose>
 
         <div id="show-alert" style="display: none">
@@ -155,18 +171,17 @@
             </div>
         </div>
 
-
         <form id="form-log" class="form-horizontal">
             <div class="control-group">
                 <label class="control-label">账号</label>
                 <div class="controls">
-                    <input type="text" name="username" placeholder="请输入密码">
+                    <input type="text" name="username" placeholder="请输入帐号">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">密码</label>
                 <div class="controls">
-                    <input type="text" name="password" placeholder="请输入密码">
+                    <input type="password" name="password" placeholder="请输入密码">
                 </div>
             </div>
 
@@ -181,7 +196,7 @@
                     <label class="control-label"></label>
                     <div class="controls">
                         <a id="a-change-captcha" href="javascript:;">
-                            <img id="img-captcha" src="" alt="验证码">
+                            <img id="img-captcha" src="" alt="验证码" title="点击更换">
                         </a>
                     </div>
                 </div>
@@ -198,10 +213,7 @@
                 <a id="a-login" class="btn btn-primary">登录</a>
                 <a class="pull-right" href="/reg.do">注册账号</a>
             </div>
-
         </form>
-
-
     </div>
     <!--box end-->
 </div>

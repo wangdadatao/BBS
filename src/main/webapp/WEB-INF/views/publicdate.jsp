@@ -18,18 +18,18 @@
                 <c:when test="${not empty sessionScope.user}">
                     <li>
                         <a href="#">
-                            <img src="http://7xsaoe.com1.z0.glb.clouddn.com/${sessionScope.user.headimg}?imageView2/1/w/20/h/20"
-                                 class="img-circle" alt="">
+                            <img id="img-showHeadImg" src="http://7xsaoe.com1.z0.glb.clouddn.com/${sessionScope.user.headimg}?imageView2/1/w/20/h/20"
+                                 class="img-circle" >
                         </a>
                     </li>
                     <li>
-                        <a href=""><i class="fa fa-plus"></i></a>
+                        <a href="/topic/addtopic.do"><i class="fa fa-plus"></i></a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-bell"></i></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-cog"></i></a>
+                        <a href="/user/usersetting.do"><i class="fa fa-cog"></i></a>
                     </li>
                     <li>
                         <a href="/loginout.do"><i class="fa fa-sign-out"></i></a>

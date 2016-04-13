@@ -23,27 +23,11 @@ public class LoginServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String getCode = req.getParameter("code");
-        String errorNum = (String) req.getSession().getAttribute("errorTimes");
-
-        String code = null;
-
-        if (getCode == null) {
-            if (errorNum != null) {
-                code = "6001";
-            }
-        }else{
-            code = getCode;
-        }
-
-        System.out.println("code为:" + code);
-        System.out.println("errorNum为:" + errorNum);
-
-
-        if (code != null) {
-            forward(req, resp, "user/login.jsp?code=" + code);
+        User user = getSessionUser(req);
+        if (user != null) {
+            resp.sendRedirect("/index.do");
         } else {
-            forward(req, resp, "user/login.jsp?");
+            forward(req, resp, "user/login.jsp");
         }
     }
 
@@ -79,22 +63,33 @@ public class LoginServlet extends BaseServlet {
             }
         }
 
-        System.out.println("");
-
         if (StringUtils.isNotEmpty(username) && StringUtils.isNotEmpty(password)) {
             User user = userService.login(username, password, getIp(request));
             if (user != null) {
-
+                //登录成功,建立User对象,删除errorTimes对象
                 session.setAttribute("user", user);
+                session.removeAttribute("errorTimes");
 
                 result.put("state", "success");
             } else {
-                userService.errNum(session);
+                //判断什么时候显示验证码
+                int errorNum = userService.errNum(session);
+                result.put("errorNum", errorNum);
+
+                System.out.println("错误次数为:" + errorNum);
+
                 result.put("state", "error");
                 result.put("errorMessage", "1"); //帐号或密码错误
             }
         } else {
             session.setAttribute("errorTimes", "3");
+
+            //判断什么时候显示验证码
+            int errorNum = userService.errNum(session);
+            result.put("errorNum", errorNum);
+
+            System.out.println("错误次数为:" + errorNum);
+
             result.put("state", "error");
             result.put("errorMessage", "2"); //参数错误
         }
