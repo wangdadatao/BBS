@@ -1,4 +1,8 @@
 BBS.iml
 .idea/
+<<<<<<< HEAD
 .target/
 .target/*
+=======
+target/
+>>>>>>> dev
