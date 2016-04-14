@@ -1,10 +1,15 @@
 package com.datao.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by 海涛 on 2016/4/8.
  * 忘记密码实体类
  */
-public class ForgetPassword {
+public class ForgetPassword implements Serializable {
+
+    private static final long serialVersionUID = -5462846247127867558L;
+
     private Integer id;
     private Integer uid;
     private String token;

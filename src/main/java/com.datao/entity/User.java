@@ -1,10 +1,15 @@
 package com.datao.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by 海涛 on 2016/4/7.
  * User实体类
  */
-public class User {
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 2045285941715311665L;
+
     public static String STATE_NORMAL = "正常";
     public static String STATE_PROHIBIT = "禁止";
 

@@ -1,10 +1,14 @@
 package com.datao.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by 海涛 on 2016/4/11.
  * 帖子实体类
  */
-public class Topic {
+public class Topic implements Serializable{
+
+    private static final long serialVersionUID = 8322891920513264169L;
 
     private Integer id;
     private String title;

@@ -4,20 +4,19 @@ import com.datao.entity.Node;
 import com.datao.entity.Topic;
 import com.datao.entity.User;
 import com.datao.util.DBhelper;
+import com.datao.util.EhCacheUtil;
 import com.google.common.collect.Lists;
 import org.apache.commons.dbutils.BasicRowProcessor;
 import org.apache.commons.dbutils.ResultSetHandler;
-import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Created by 海涛 on 2016/4/11.
+ * TopicDAO
  */
 public class TopicDao {
 
@@ -32,28 +31,38 @@ public class TopicDao {
 
     //根据id查找帖子
     public Topic findById(Integer topicId) {
-        String sql = "SELECT topic.*,`user`.`username`, `user`.`headimg`,node.`type`FROM topic \n" +
-                "INNER JOIN `user` ON topic.`userid` = `user`.`id`\n" +
-                "INNER JOIN node ON topic.`nodeid` = node.`id`\n" +
-                "WHERE topic.`id` = ?";
-        return DBhelper.query(sql, new ResultSetHandler<Topic>() {
-            @Override
-            public Topic handle(ResultSet resultSet) throws SQLException {
-                if (resultSet.next()) {
-                    BasicRowProcessor rowProcessor = new BasicRowProcessor();
 
-                    Topic topic = rowProcessor.toBean(resultSet, Topic.class);
-                    User user = rowProcessor.toBean(resultSet, User.class);
-                    Node node = rowProcessor.toBean(resultSet, Node.class);
+        Topic topic = (Topic) EhCacheUtil.get("simplecache", "topic:" + topicId);
 
-                    topic.setUser(user);
-                    topic.setNode(node);
+        if (topic == null) {
+            String sql = "SELECT topic.*,`user`.`username`, `user`.`headimg`,node.`type`FROM topic \n" +
+                    "INNER JOIN `user` ON topic.`userid` = `user`.`id`\n" +
+                    "INNER JOIN node ON topic.`nodeid` = node.`id`\n" +
+                    "WHERE topic.`id` = ?";
+            topic = DBhelper.query(sql, new ResultSetHandler<Topic>() {
+                @Override
+                public Topic handle(ResultSet resultSet) throws SQLException {
+                    if (resultSet.next()) {
+                        BasicRowProcessor rowProcessor = new BasicRowProcessor();
 
-                    return topic;
+                        Topic topic = rowProcessor.toBean(resultSet, Topic.class);
+                        User user = rowProcessor.toBean(resultSet, User.class);
+                        Node node = rowProcessor.toBean(resultSet, Node.class);
+
+                        topic.setUser(user);
+                        topic.setNode(node);
+
+                        return topic;
+                    }
+                    return null;
                 }
-                return null;
-            }
-        }, topicId);
+            }, topicId);
+
+            EhCacheUtil.set("simplecache", "topic:" + topic.getId(), topic);
+        }
+
+        return topic;
+
     }
 
     //查询某一类的总条数

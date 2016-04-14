@@ -19,7 +19,7 @@ public class DBhelper {
         QueryRunner qr = new QueryRunner(ConnectionManager.getDataSource());
         try {
             T t = qr.query(sql, handler, objects);
-            logger.debug("SQL{}", sql);
+            logger.debug("SQL:{}", sql);
             return t;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -33,7 +33,7 @@ public class DBhelper {
         QueryRunner qr = new QueryRunner(ConnectionManager.getDataSource());
         try {
             qr.update(sql, objects);
-            logger.debug("SQL{}", sql);
+            logger.debug("SQL:{}", sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -44,7 +44,7 @@ public class DBhelper {
         QueryRunner qr = new QueryRunner(ConnectionManager.getDataSource());
         try {
             Long id = qr.insert(sql, new ScalarHandler<Long>(), objects);
-            logger.debug("SQL{}", sql);
+            logger.debug("SQL:{}", sql);
             return id;
         } catch (SQLException e) {
             e.printStackTrace();

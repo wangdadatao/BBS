@@ -1,10 +1,15 @@
 package com.datao.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by 海涛 on 2016/4/12.
  * 回复实体类
  */
-public class Comment {
+public class Comment implements Serializable {
+
+    private static final long serialVersionUID = 1586229351974949441L;
+
     private Integer id;
     private String createtime;
     private String texts;
