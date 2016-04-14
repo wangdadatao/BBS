@@ -2,6 +2,7 @@ package com.datao.entity;
 
 /**
  * Created by 海涛 on 2016/4/8.
+ * 忘记密码实体类
  */
 public class ForgetPassword {
     private Integer id;

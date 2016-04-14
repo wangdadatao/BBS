@@ -10,16 +10,20 @@
 
 <div class="header-bar">
     <div class="container">
-        <a href="/index.do" class="brand">
-            <i class="fa fa-reddit-alien"></i>
+        <a href="/index.do" class="brand" id="a-logo">
+            <img src="/static/img/logo.png" style="height: 30px;">
+            <small>
+                <small id="small-logo">VR社区</small>
+            </small>
         </a>
         <ul class="unstyled inline pull-right">
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
                     <li>
-                        <a href="#">
-                            <img id="img-showHeadImg" src="http://7xsaoe.com1.z0.glb.clouddn.com/${sessionScope.user.headimg}?imageView2/1/w/20/h/20"
-                                 class="img-circle" >
+                        <a href="/user/userzone.do">
+                            <img id="img-showHeadImg"
+                                 src="http://7xsaoe.com1.z0.glb.clouddn.com/${sessionScope.user.headimg}?imageView2/1/w/20/h/20"
+                                 class="img-circle">
                         </a>
                     </li>
                     <li>
